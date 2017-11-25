@@ -1,0 +1,36 @@
+ext {
+    kovenantVersion = '3.3.0'
+    supportLibraryVersion = '26.1.0'
+    coroutinesVersion = "0.19.3"
+    lifecycleVersion = "1.0.0"
+
+    dependencies = [
+
+            // google
+            appCompat          : "com.android.support:appcompat-v7:$supportLibraryVersion",
+            supportV4          : "com.android.support:support-v4:$supportLibraryVersion",
+            supportDesign      : "com.android.support:design:$supportLibraryVersion",
+            recyclerView       : "com.android.support:recyclerview-v7:$supportLibraryVersion",
+            constraintLayout   : "com.android.support.constraint:constraint-layout:1.0.2",
+
+            lifecycleRuntime   : "android.arch.lifecycle:runtime:1.0.3",
+            lifecycleExtensions: "android.arch.lifecycle:extensions:$lifecycleVersion",
+            lifecycleReactive  : "android.arch.lifecycle:reactivestreams:$lifecycleVersion",
+            lifecycleCompiler  : "android.arch.lifecycle:compiler:$lifecycleVersion",
+
+            kotlin             : "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version",
+
+            widgetAdapter      : "de.welt:widgetAdapter:0.4",
+
+            kodein             : 'com.github.salomonbrys.kodein:kodein:4.0.0',
+
+            jUnit              : "junit:junit:4.12",
+            expekt             : "com.winterbe:expekt:0.5.0",
+            mockitoKotlin      : "com.nhaarman:mockito-kotlin:1.4.0",
+            mockito            : "org.mockito:mockito-inline:2.7.19",
+
+            coroutines         : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
+            coroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
+    ]
+}
