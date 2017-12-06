@@ -1,5 +1,6 @@
-apply plugin: 'com.android.feature'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'io.objectbox'
 
 def config = rootProject.ext
@@ -30,11 +31,17 @@ android {
 dependencies {
     Map<String, String> dependencies = config.dependencies;
 
+    implementation project(":toolKit")
+
     implementation dependencies.kotlin
     implementation dependencies.kodein
 
     implementation dependencies.coroutines
     implementation dependencies.coroutinesAndroid
+
+    implementation dependencies.objectboxAndroid
+    implementation dependencies.objectboxKotlin
+    kapt dependencies.objectboxProcessor
 }
 
 kotlin {

@@ -1,1 +1,1 @@
-include ':app', ':data', ':timerlist', ':toolKit', ':timer'
+include ':app', ':data', ':timerlist', ':toolKit', ':timer', ':commonUi'

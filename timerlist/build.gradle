@@ -1,4 +1,4 @@
-apply plugin: 'com.android.feature'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 
@@ -33,6 +33,8 @@ dependencies{
     Map<String, String> dependencies = config.dependencies;
 
     implementation project(':toolKit')
+    implementation project(':commonUi')
+    implementation project(':timer')
     implementation project(':data')
 
     implementation dependencies.kotlin

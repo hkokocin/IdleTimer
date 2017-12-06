@@ -31,6 +31,7 @@ dependencies{
     Map<String, String> dependencies = config.dependencies;
 
     implementation project(':timerlist')
+    implementation project(':data')
 
     implementation dependencies.kotlin
     implementation dependencies.kodein

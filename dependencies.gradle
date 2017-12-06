@@ -1,6 +1,5 @@
 ext {
-    kovenantVersion = '3.3.0'
-    supportLibraryVersion = '26.1.0'
+    supportLibraryVersion = '27.0.0'
     coroutinesVersion = "0.19.3"
     lifecycleVersion = "1.0.0"
 
@@ -13,10 +12,7 @@ ext {
             recyclerView       : "com.android.support:recyclerview-v7:$supportLibraryVersion",
             constraintLayout   : "com.android.support.constraint:constraint-layout:1.0.2",
 
-            lifecycleRuntime   : "android.arch.lifecycle:runtime:1.0.3",
             lifecycleExtensions: "android.arch.lifecycle:extensions:$lifecycleVersion",
-            lifecycleReactive  : "android.arch.lifecycle:reactivestreams:$lifecycleVersion",
-            lifecycleCompiler  : "android.arch.lifecycle:compiler:$lifecycleVersion",
 
             kotlin             : "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version",
 
@@ -24,13 +20,17 @@ ext {
 
             kodein             : 'com.github.salomonbrys.kodein:kodein:4.0.0',
 
+            objectboxKotlin    : "io.objectbox:objectbox-kotlin:$objectboxVersion",
+            objectboxAndroid   : "io.objectbox:objectbox-android:$objectboxVersion",
+            objectboxProcessor : "io.objectbox:objectbox-processor:$objectboxVersion",
+
+            coroutines         : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
+            coroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion",
+
             jUnit              : "junit:junit:4.12",
             expekt             : "com.winterbe:expekt:0.5.0",
             mockitoKotlin      : "com.nhaarman:mockito-kotlin:1.4.0",
-            mockito            : "org.mockito:mockito-inline:2.7.19",
-
-            coroutines         : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
-            coroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+            mockito            : "org.mockito:mockito-inline:2.7.19"
 
     ]
 }
