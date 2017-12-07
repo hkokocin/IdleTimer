@@ -6,6 +6,7 @@ import com.github.salomonbrys.kodein.instance
 import com.kokocinski.data.TimerRepository
 import com.kokocinski.data.dataModule
 import com.kokocinski.data.initDataModule
+import com.squareup.leakcanary.LeakCanary
 
 
 class IdleTimerApp : Application() {
@@ -17,5 +18,7 @@ class IdleTimerApp : Application() {
         super.onCreate()
         initDataModule(this)
         timerRepository.initializeDefaultTimers()
+
+        if (!LeakCanary.isInAnalyzerProcess(this)) LeakCanary.install(this)
     }
 }

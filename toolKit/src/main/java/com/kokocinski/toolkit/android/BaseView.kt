@@ -12,14 +12,16 @@ import com.kokocinski.toolkit.androidExtensions.getColorInt
 import kotlin.reflect.KClass
 
 abstract class BaseView(@LayoutRes private val layout: Int) : LifecycleObserver {
+
     lateinit var root: View
         private set
 
-    val context: Context = root.context
+    val context: Context get() = root.context
 
-    fun createView(inflater: LayoutInflater, parent: ViewGroup? = null, attachToRoot: Boolean = true) {
+    fun createView(inflater: LayoutInflater, parent: ViewGroup? = null, attachToRoot: Boolean = true): View {
         root = inflater.inflate(layout, parent, attachToRoot)
         onViewCreated()
+        return root
     }
 
     protected open fun onViewCreated() {}

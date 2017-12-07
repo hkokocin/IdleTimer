@@ -11,6 +11,7 @@ class TimerListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(view.createView(layoutInflater, null, false))
         lifecycle.addObserver(view)
     }
 }

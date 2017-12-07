@@ -2,13 +2,22 @@ package com.kokocinski.timerlist
 
 import android.view.Gravity
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.TextView
 import com.kokocinski.data.Timer
+import com.kokocinski.toolkit.androidExtensions.onAttachedToWindow
+import com.kokocinski.toolkit.androidExtensions.onDetachedFromWindow
+import com.kokocinski.toolkit.coroutines.Jobs
 import de.welt.widgetadapter.Widget
+import kotlinx.coroutines.experimental.android.UI
 
-class TimerWidget : Widget<TimerWidgetState>(R.layout.timer_widget) {
+class TimerWidget(
+        private val jobs: Jobs
+) : Widget<TimerWidgetState>(R.layout.timer_widget) {
 
     private val llContainer: LinearLayout by viewId(R.id.ll_container)
     private val tvName: TextView by viewId(R.id.tv_name)
@@ -17,9 +26,21 @@ class TimerWidget : Widget<TimerWidgetState>(R.layout.timer_widget) {
     private var timer = Timer()
     private var dispatch: (Any) -> Unit = {}
 
+    private val animation = AlphaAnimation(0.5f, 1.0f).apply {
+        duration = 500
+        startOffset = 0
+        interpolator = AccelerateDecelerateInterpolator()
+        repeatMode = Animation.REVERSE
+        repeatCount = Animation.INFINITE
+    }
+
     override fun onViewCreated(view: View) {
-        llContainer.setOnClickListener { dispatch(StartTimerAction(timer)) }
+        llContainer.setOnClickListener { if (timer.isFinished) dispatch(StartTimerAction(timer)) }
         llContainer.setOnLongClickListener { showPopup(); true }
+
+        //todo fix that shit!
+        llContainer.onAttachedToWindow { jobs.interval(UI, 1000) { updateTimer() } }
+        llContainer.onDetachedFromWindow { jobs.clear() }
     }
 
     override fun setData(data: TimerWidgetState) {
@@ -27,9 +48,15 @@ class TimerWidget : Widget<TimerWidgetState>(R.layout.timer_widget) {
         dispatch = data.dispatch
 
         tvName.text = data.name
-        tvTimer.text = data.timeRemaining
+        updateTimer()
+    }
 
-        llContainer.isClickable = data.timerFinished
+    private fun updateTimer() {
+        tvTimer.text = timer.getTimeRemainingString()
+        if (timer.isFinished)
+            tvTimer.startAnimation(animation)
+        else
+            animation.reset()
     }
 
     private fun showPopup() {

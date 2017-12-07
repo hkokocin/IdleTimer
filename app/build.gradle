@@ -35,4 +35,8 @@ dependencies{
 
     implementation dependencies.kotlin
     implementation dependencies.kodein
+    implementation dependencies.coroutines
+
+    debugImplementation dependencies.leakCanary
+    releaseImplementation dependencies.leakCanaryNoop
 }

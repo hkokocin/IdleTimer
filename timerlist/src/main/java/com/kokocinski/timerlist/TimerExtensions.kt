@@ -1,22 +1,31 @@
 package com.kokocinski.timerlist
 
+import android.annotation.SuppressLint
 import com.kokocinski.data.Timer
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 fun Timer.toWidgetState(dispatch: (Any) -> Unit): TimerWidgetState = TimerWidgetState(
         this,
-        getTimerString(),
-        isFinished,
         dispatch
 )
 
-private val formatter by lazy { SimpleDateFormat("HH:mm:ss", Locale.getDefault()) }
+val Timer.isFinished: Boolean get() = System.currentTimeMillis() - start > duration
 
-private val Timer.isFinished: Boolean get() = System.currentTimeMillis() - start > duration
+fun Timer.getTimeRemainingString(): String {
+    val time = maxOf(millisRemaining, 0)
 
-private fun Timer.getTimerString(): String {
-    val delta = start + duration - System.currentTimeMillis()
-    val time = maxOf(delta, 0)
-    return formatter.format(time)
+    val segments = listOf(
+            time / (1000 * 60 * 60) % 24,
+            time / (1000 * 60) % 60,
+            time / 1000 % 60
+    )
+
+    return segments
+            .map { it.toString() }
+            .map { if (it.length == 1) "0" + it else it }
+            .joinToString(":")
 }
+
+val Timer.millisRemaining get() = start + duration - System.currentTimeMillis()

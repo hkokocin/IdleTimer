@@ -10,12 +10,12 @@ data class TimerListState(
 
 data class TimerWidgetState(
         val timer: Timer = Timer(),
-        val timeRemaining: String = "00:00:00",
-        val timerFinished: Boolean = false,
         val dispatch: (Any) -> Unit = {}
 ){
     val id: Long get() = timer.id
     val name: String get() = timer.name
+    val start: Long get() = timer.start
+    val duration: Long get() = timer.duration
 }
 
 data class LaunchAction(val packageName: String = "")

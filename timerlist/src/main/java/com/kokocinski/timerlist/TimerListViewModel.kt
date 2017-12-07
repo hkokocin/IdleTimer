@@ -38,12 +38,23 @@ class TimerListViewModel(
     }
 
     private fun onStartTimer(timer: Timer) {
-        val timers = state.timers.map {
-            if (it.id == timer.id) it.copy(timer = timer.copy(start = timeProvider.currentTimeMillis()))
-            else it
-        }
+        val timers = state.timers
+                .map {
+                    if (it.id == timer.id) startTimer(it, timer)
+                    else it
+                }
+                .sortedBy { it.timer.millisRemaining }
 
         update(state.copy(timers = timers))
+    }
+
+    private fun startTimer(
+            widgetState: TimerWidgetState,
+            expiredTimer: Timer
+    ): TimerWidgetState {
+        val timer = expiredTimer.copy(start = timeProvider.currentTimeMillis())
+        timerRepository.store(timer)
+        return widgetState.copy(timer = timer)
     }
 
     private fun delete(id: Long) {
@@ -56,6 +67,7 @@ class TimerListViewModel(
         val timers = timerRepository.all
                 .await()
                 .map { it.toWidgetState(::dispatch) }
+                .sortedBy { it.timer.millisRemaining }
 
         update(state.copy(timers = timers))
     }
