@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import com.kokocinski.data.Timer
 import com.kokocinski.data.TimerRepository
+import com.kokocinski.data.jobs.JobDataRepository
 import com.kokocinski.timer.TimerActivity
 import com.kokocinski.timer.editTimer
 import com.kokocinski.toolkit.SystemTimerProvider
@@ -15,6 +16,7 @@ import kotlinx.coroutines.experimental.android.UI
 
 class TimerListViewModel(
         private val timerRepository: TimerRepository,
+        private val jobDataRepository: JobDataRepository,
         private val jobs: Jobs,
         private val timeProvider: SystemTimerProvider
 ) : Store<TimerListState>(TimerListState()) {
@@ -54,6 +56,7 @@ class TimerListViewModel(
     ): TimerWidgetState {
         val timer = expiredTimer.copy(start = timeProvider.currentTimeMillis())
         timerRepository.store(timer)
+        jobDataRepository.start(timer)
         return widgetState.copy(timer = timer)
     }
 

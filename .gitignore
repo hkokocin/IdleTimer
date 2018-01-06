@@ -47,3 +47,5 @@ google-services.json
 gradle
 .idea
 build
+releaseKey.jks
+local.properties

@@ -39,6 +39,8 @@ dependencies {
     implementation dependencies.coroutines
     implementation dependencies.coroutinesAndroid
 
+    implementation dependencies.androidJob
+
     implementation dependencies.objectboxAndroid
     implementation dependencies.objectboxKotlin
     kapt dependencies.objectboxProcessor

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg8"
+   inkscape:export-filename="/Users/hkokocin/repositories/IdleTimer/app/src/main/res/drawable-xxhdpi/launcher.png"
+   inkscape:export-xdpi="36.576"
+   inkscape:export-ydpi="36.576"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="IdleTimer_logo.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.91392816"
+     inkscape:cx="174.55023"
+     inkscape:cy="174.09654"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="false"
+     inkscape:window-width="1440"
+     inkscape:window-height="855"
+     inkscape:window-x="1"
+     inkscape:window-y="91"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-197)">
+    <g
+       id="g4813"
+       transform="translate(0.26458694,1.127838)">
+      <g
+         id="g4804">
+        <rect
+           transform="rotate(-36.384049)"
+           y="186.46051"
+           x="-119.26691"
+           height="7.2501764"
+           width="20.570271"
+           id="rect4576"
+           style="opacity:1;vector-effect:none;fill:#4dd0e1;fill-opacity:1;stroke:#ffffff;stroke-width:3.96875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
+        <rect
+           style="fill:#4dd0e1;fill-opacity:1;stroke:#ffffff;stroke-width:3.96875;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+           id="rect4614"
+           width="20.570271"
+           height="7.2501764"
+           x="-199.34679"
+           y="127.45493"
+           transform="matrix(-0.80505897,-0.59319478,-0.59319478,0.80505897,0,0)" />
+      </g>
+      <g
+         transform="translate(5.9106488,-0.28950124)"
+         id="g4786">
+        <g
+           id="g4779"
+           transform="translate(1.1579476)">
+          <circle
+             r="36.028656"
+             cy="250.1218"
+             cx="42.666817"
+             id="path4772"
+             style="opacity:1;fill:#fffffe;fill-opacity:1;stroke-width:0.28878552" />
+        </g>
+        <path
+           inkscape:connector-curvature="0"
+           id="path4636"
+           d="M 43.824544,216.17869 A 33.943241,33.943241 0 0 0 9.8814419,250.1218 33.943241,33.943241 0 0 0 13.552237,265.46881 l 9.058145,0.0328 -0.114851,-7.09282 h 12.810534 v 7.09282 l 4.576299,-0.0825 v -0.0461 l 1.536074,0.0186 1.03366,-0.0186 v 0.031 l 8.051536,0.0976 -0.114408,-7.09282 H 63.19976 v 7.09282 l 10.853188,-0.0186 a 33.943241,33.943241 0 0 0 3.715139,-15.3612 33.943241,33.943241 0 0 0 -33.943543,-33.94311 z m -11.123245,17.31544 a 6.1923482,6.1923482 0 0 1 6.192636,6.1922 6.1923482,6.1923482 0 0 1 -6.192636,6.19263 6.1923482,6.1923482 0 0 1 -6.192195,-6.19263 6.1923482,6.1923482 0 0 1 6.192195,-6.1922 z m 20.297128,0 a 6.1923482,6.1923482 0 0 1 6.192637,6.1922 6.1923482,6.1923482 0 0 1 -6.192637,6.19263 6.1923482,6.1923482 0 0 1 -6.192195,-6.19263 6.1923482,6.1923482 0 0 1 6.192195,-6.1922 z m -27.464004,27.39261 v 7.92826 l -10.019522,-4.4e-4 a 33.943241,33.943241 0 0 0 28.309643,15.25034 33.943241,33.943241 0 0 0 28.304764,-15.25034 l -11.707257,4.4e-4 v -7.92826 H 53.42812 v 7.92826 l -12.062451,-0.002 -8.837312,0.002 v -7.92826 z"
+           style="fill:#4dd0e1;fill-opacity:1;stroke-width:0.22704117" />
+      </g>
+    </g>
+  </g>
+</svg>

@@ -68,8 +68,9 @@ class TimerWidget(
 
     private fun onMenuItemClicked(itemId: Int): Boolean {
         when (itemId) {
-            R.id.menu_item_edit   -> dispatch(EditTimerAction(timer.id))
-            R.id.menu_item_delete -> dispatch(DeleteTimerAction(timer.id))
+            R.id.menu_item_edit    -> dispatch(EditTimerAction(timer.id))
+            R.id.menu_item_delete  -> dispatch(DeleteTimerAction(timer.id))
+            R.id.menu_item_restart -> dispatch(StartTimerAction(timer))
         }
 
         return true

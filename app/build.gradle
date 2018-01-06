@@ -4,6 +4,10 @@ apply plugin: 'kotlin-android'
 
 def config = rootProject.ext
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+println "Password: " + properties.getProperty('RELEASE_KEY_PASSWORD')
+
 android {
     compileSdkVersion config.targetSdkVersion
     buildToolsVersion config.buildToolsVersion
@@ -15,28 +19,51 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
 
+    signingConfigs {
+        release {
+            storeFile file("../release.key")
+            storePassword properties.getProperty('RELEASE_KEY_PASSWORD')
+            keyAlias "releaseKey"
+            keyPassword properties.getProperty('RELEASE_KEY_PASSWORD')
+        }
     }
 
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix '.debug'
         }
     }
 
 }
 
-dependencies{
+dependencies {
     Map<String, String> dependencies = config.dependencies;
 
     implementation project(':timerlist')
     implementation project(':data')
+    implementation project(':toolKit')
 
     implementation dependencies.kotlin
     implementation dependencies.kodein
     implementation dependencies.coroutines
+    implementation dependencies.supportCompat
+    implementation(dependencies.androidJob) {
+        exclude group: "com.android.support"
+    }
 
     debugImplementation dependencies.leakCanary
     releaseImplementation dependencies.leakCanaryNoop
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }

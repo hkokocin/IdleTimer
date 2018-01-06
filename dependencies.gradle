@@ -9,6 +9,7 @@ ext {
             // google
             appCompat          : "com.android.support:appcompat-v7:$supportLibraryVersion",
             supportV4          : "com.android.support:support-v4:$supportLibraryVersion",
+            supportCompat      : "com.android.support:support-compat:$supportLibraryVersion",
             supportDesign      : "com.android.support:design:$supportLibraryVersion",
             recyclerView       : "com.android.support:recyclerview-v7:$supportLibraryVersion",
             constraintLayout   : "com.android.support.constraint:constraint-layout:1.0.2",
@@ -27,6 +28,8 @@ ext {
 
             coroutines         : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
             coroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion",
+
+            androidJob         : 'com.evernote:android-job:1.2.1',
 
             leakCanary         : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
             leakCanaryNoop     : "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion",

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">data</string>
+    <string name="notification_message_template">%1$s is ready, go for it!</string>
 </resources>

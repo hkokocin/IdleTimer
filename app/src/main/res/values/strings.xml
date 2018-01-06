@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">IdleTimer</string>
+    <string name="timer_channel_name">Timer Notifications</string>
+    <string name="timer_channel_description">Subscribe to this channel to be informed when a timer runs out.</string>
 </resources>

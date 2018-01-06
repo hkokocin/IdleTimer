@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/menu_item_restart"
+        android:icon="@drawable/delete"
+        android:title="@string/restart"/>
+^
+    <item
         android:id="@+id/menu_item_edit"
         android:icon="@drawable/edit"
         android:title="@string/edit"/>

@@ -11,5 +11,6 @@ val defaultTimers = listOf(
         Timer(name = "Heroic Summon", duration = 48 * hours),
         Timer(name = "Celestial Islands", duration = 6 * hours),
         Timer(name = "Celestial Islands Boss", duration = 8 * hours),
-        Timer(name = "Scout", duration = 8 * hours)
+        Timer(name = "Scout", duration = 8 * hours),
+        Timer(name = "Midas", duration = 8 * hours)
 )
