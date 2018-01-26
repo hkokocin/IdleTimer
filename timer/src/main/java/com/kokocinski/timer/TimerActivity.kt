@@ -4,15 +4,20 @@ import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.github.salomonbrys.kodein.instance
+import com.kokocinski.toolkit.android.BaseActivity
 import com.kokocinski.toolkit.androidExtensions.start
 
 const val TIMER_ID = "TIMER_ID"
 
-class TimerActivity : AppCompatActivity() {
+class TimerActivity : BaseActivity() {
+
+    override val injector by lazy { timerScope(this) }
+    private val view by inject<TimerView>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.timer_activity)
+        setContentView(view, R.layout.timer_activity)
         initActionBar()
     }
 

@@ -1,20 +1,20 @@
 package com.kokocinski.timerlist
 
-import android.app.Activity
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import com.kokocinski.toolkit.android.BaseView
+import com.kokocinski.toolkit.redukt.BaseView
 import de.welt.widgetadapter.WidgetAdapter
 
 class TimerListView(
         private val viewModel: TimerListViewModel,
         private val adapter: WidgetAdapter,
-        private val activity: Activity,
+        private val activity: AppCompatActivity,
         timerWidgetProvider: () -> TimerWidget
-) : BaseView(R.layout.timer_list_activity) {
+) : BaseView() {
 
     private val rvTimers: RecyclerView by viewId(R.id.rv_timers)
 
@@ -37,5 +37,4 @@ class TimerListView(
         rvTimers.adapter = adapter
         rvTimers.layoutManager = LinearLayoutManager(activity)
     }
-
 }

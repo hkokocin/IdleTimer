@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="Widget.Inverse" parent="AppTheme">
+        <item name="android:colorActivatedHighlight">@color/colorAccent</item>
+        <item name="android:colorControlActivated">@color/text_dark_bg</item>
+        <item name="android:colorControlHighlight">@color/text_dark_bg</item>
+        <item name="android:colorControlNormal">@color/hint_dark_bg</item>
+        <!--<item name="android:colorPressedHighlight">@color/pressed_bg</item>-->
+        <!--<item name="android:colorLongPressedHighlight">@color/long_pressed_bg</item>-->
+    </style>
+
+
+    <style name="TextInputLayout">
+        <item name="android:theme">@style/Widget.Inverse</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginEnd">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/space_xlarge</item>
+        <item name="android:textColorHint">@color/hint_dark_bg</item>
+    </style>
+
+    <style name="Toolbar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+</resources>

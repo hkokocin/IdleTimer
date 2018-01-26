@@ -23,6 +23,14 @@
         {
           "id": "4:6442111565246714144",
           "name": "start"
+        },
+        {
+          "id": "5:6001974116992547852",
+          "name": "notificationTarget"
+        },
+        {
+          "id": "6:9123630858065550045",
+          "name": "autoStartTimer"
         }
       ],
       "relations": []
@@ -36,10 +44,7 @@
   "modelVersionParserMinimum": 4,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [
-    6001974116992547852,
-    9123630858065550045
-  ],
+  "retiredPropertyUids": [],
   "retiredRelationUids": [],
   "version": 1
 }

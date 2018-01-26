@@ -1,11 +1,12 @@
 package com.kokocinski.timerlist
 
 import android.app.Activity
+import android.support.v7.app.AppCompatActivity
 import com.kokocinski.data.Timer
 
 data class TimerListState(
         val timers: List<TimerWidgetState> = emptyList(),
-        val command: (Activity) -> Unit = {}
+        val command: (AppCompatActivity) -> Unit = {}
 )
 
 data class TimerWidgetState(

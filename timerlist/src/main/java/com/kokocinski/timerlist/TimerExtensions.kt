@@ -17,7 +17,7 @@ fun Timer.getTimeRemainingString(): String {
     val time = maxOf(millisRemaining, 0)
 
     val segments = listOf(
-            time / (1000 * 60 * 60) % 24,
+            time / (1000 * 60 * 60),
             time / (1000 * 60) % 60,
             time / 1000 % 60
     )

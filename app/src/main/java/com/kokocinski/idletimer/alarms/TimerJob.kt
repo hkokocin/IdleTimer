@@ -27,7 +27,7 @@ class TimerJob : Job() {
                 .setAutoCancel(true)
                 .build()
 
-        context.notificationManager.notify(0, notification)
+        context.notificationManager.notify(title.hashCode(), notification)
 
         return Result.SUCCESS
     }

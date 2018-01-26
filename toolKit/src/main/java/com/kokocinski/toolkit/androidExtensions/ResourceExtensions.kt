@@ -7,7 +7,7 @@ import android.os.Build
 import kotlin.reflect.KClass
 
 @Suppress("UNCHECKED_CAST", "DEPRECATION")
-fun <T : Any> getResource(resources: Resources, resourceId: Int, type: KClass<T>) = when (type) {
+fun <T : Any> getAnyResource(resources: Resources, resourceId: Int, type: KClass<T>) = when (type) {
     String::class              -> resources.getString(resourceId) as T
     Array<String>::class       -> resources.getStringArray(resourceId) as T
     CharSequence::class        -> resources.getText(resourceId) as T

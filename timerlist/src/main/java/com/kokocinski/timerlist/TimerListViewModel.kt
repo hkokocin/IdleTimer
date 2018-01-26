@@ -1,17 +1,13 @@
 package com.kokocinski.timerlist
 
-import android.app.Activity
-import android.content.Intent
 import com.kokocinski.data.Timer
 import com.kokocinski.data.TimerRepository
 import com.kokocinski.data.jobs.JobDataRepository
-import com.kokocinski.timer.TimerActivity
 import com.kokocinski.timer.editTimer
 import com.kokocinski.toolkit.SystemTimerProvider
-import com.kokocinski.toolkit.android.Command
-import com.kokocinski.toolkit.android.Store
 import com.kokocinski.toolkit.android.launchAppByPackage
 import com.kokocinski.toolkit.coroutines.Jobs
+import com.kokocinski.toolkit.redukt.BaseViewModel
 import kotlinx.coroutines.experimental.android.UI
 
 class TimerListViewModel(
@@ -19,7 +15,7 @@ class TimerListViewModel(
         private val jobDataRepository: JobDataRepository,
         private val jobs: Jobs,
         private val timeProvider: SystemTimerProvider
-) : Store<TimerListState>(TimerListState()) {
+) : BaseViewModel<TimerListState>(TimerListState()) {
 
     init {
         loadAll()
@@ -41,13 +37,11 @@ class TimerListViewModel(
 
     private fun onStartTimer(timer: Timer) {
         val timers = state.timers
-                .map {
-                    if (it.id == timer.id) startTimer(it, timer)
-                    else it
-                }
+                .map { if (it.id == timer.id) startTimer(it, timer) else it }
                 .sortedBy { it.timer.millisRemaining }
 
         update(state.copy(timers = timers))
+        transient(state.copy(command = clearNotification(timer.name.hashCode())))
     }
 
     private fun startTimer(
@@ -73,11 +67,5 @@ class TimerListViewModel(
                 .sortedBy { it.timer.millisRemaining }
 
         update(state.copy(timers = timers))
-    }
-}
-
-private class EditTimerCommand(private val id: Long) : Command<Activity> {
-    override fun invoke(context: Activity) {
-        context.startActivity(Intent(context, TimerActivity::class.java))
     }
 }

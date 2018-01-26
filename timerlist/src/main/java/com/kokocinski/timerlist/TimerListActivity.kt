@@ -2,16 +2,17 @@ package com.kokocinski.timerlist
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
 import com.github.salomonbrys.kodein.instance
+import com.kokocinski.toolkit.android.BaseActivity
 
-class TimerListActivity : AppCompatActivity() {
+class TimerListActivity : BaseActivity() {
 
-    private val injector by lazy { timerListScope(this) }
-    private val view by lazy { injector.instance<TimerListView>() }
+    override val injector by lazy { timerListScope(this) }
+    private val view by inject<TimerListView>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(view.createView(layoutInflater, null, false))
-        lifecycle.addObserver(view)
+        setContentView(view, R.layout.timer_list_activity)
     }
 }

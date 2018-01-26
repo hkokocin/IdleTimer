@@ -48,6 +48,7 @@ dependencies {
 
     implementation project(':timerlist')
     implementation project(':data')
+    implementation project(':commonUi')
     implementation project(':toolKit')
 
     implementation dependencies.kotlin

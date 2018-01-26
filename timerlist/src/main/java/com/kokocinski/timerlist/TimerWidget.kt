@@ -38,7 +38,7 @@ class TimerWidget(
         llContainer.setOnClickListener { if (timer.isFinished) dispatch(StartTimerAction(timer)) }
         llContainer.setOnLongClickListener { showPopup(); true }
 
-        //todo fix that shit!
+        //todo find a better way
         llContainer.onAttachedToWindow { jobs.interval(UI, 1000) { updateTimer() } }
         llContainer.onDetachedFromWindow { jobs.clear() }
     }
