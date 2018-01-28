@@ -1,3 +1,4 @@
 <resources>
     <string name="name">Name of the timer</string>
+    <string name="delete">Delete</string>
 </resources>

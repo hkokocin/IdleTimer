@@ -39,7 +39,9 @@ dependencies{
 
     implementation dependencies.kotlin
     implementation dependencies.kodein
+
     implementation dependencies.appCompat
+    implementation dependencies.constraintLayout
 
     implementation dependencies.coroutines
     implementation dependencies.coroutinesAndroid

@@ -6,6 +6,8 @@ import android.arch.lifecycle.OnLifecycleEvent
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
+import com.kokocinski.timer.REQUEST_EDIT_TIMER
 import com.kokocinski.toolkit.redukt.BaseView
 import de.welt.widgetadapter.WidgetAdapter
 
@@ -16,6 +18,7 @@ class TimerListView(
         timerWidgetProvider: () -> TimerWidget
 ) : BaseView() {
 
+    private val toolbar: Toolbar by viewId(R.id.toolbar)
     private val rvTimers: RecyclerView by viewId(R.id.rv_timers)
 
     init {
@@ -23,9 +26,18 @@ class TimerListView(
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun initToolbar() {
+        activity.setSupportActionBar(toolbar)
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun initialize(lifecycleOwner: LifecycleOwner) {
         initRecyclerView()
         bindViewModel(lifecycleOwner.lifecycle)
+    }
+
+    fun onOptionsItemSelected(itemId: Int) {
+        if (itemId == R.id.new_timer) viewModel.dispatch(EditTimerAction(0))
     }
 
     private fun bindViewModel(lifecycle: Lifecycle) = viewModel.observe(lifecycle) {
@@ -36,5 +48,9 @@ class TimerListView(
     private fun initRecyclerView() {
         rvTimers.adapter = adapter
         rvTimers.layoutManager = LinearLayoutManager(activity)
+    }
+
+    fun onActivityResult(requestCode: Int) {
+        if(requestCode == REQUEST_EDIT_TIMER) viewModel.dispatch(UpdateTimersAction())
     }
 }

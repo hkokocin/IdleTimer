@@ -23,10 +23,11 @@ class TimerListViewModel(
 
     override fun dispatch(action: Any) {
         when (action) {
-            is LaunchAction      -> transient(state.copy(command = launchAppByPackage(action.packageName)))
-            is DeleteTimerAction -> delete(action.id)
-            is EditTimerAction   -> transient(state.copy(command = editTimer(action.id)))
-            is StartTimerAction  -> onStartTimer(action.timer)
+            is LaunchAction       -> transient(state.copy(command = launchAppByPackage(action.packageName)))
+            is DeleteTimerAction  -> delete(action.id)
+            is EditTimerAction    -> transient(state.copy(command = editTimer(action.id)))
+            is StartTimerAction   -> onStartTimer(action.timer)
+            is UpdateTimersAction -> loadAll()
         }
     }
 

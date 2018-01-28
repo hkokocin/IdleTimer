@@ -2,6 +2,7 @@ package com.kokocinski.timer
 
 import com.kokocinski.data.Timer
 import com.kokocinski.data.TimerRepository
+import com.kokocinski.toolkit.android.finishActivity
 import com.kokocinski.toolkit.coroutines.Jobs
 import com.kokocinski.toolkit.redukt.BaseViewModel
 import kotlinx.coroutines.experimental.android.UI
@@ -11,17 +12,26 @@ class TimerViewModel(
         private val jobs: Jobs
 ) : BaseViewModel<TimerUiData>(TimerUiData()) {
 
+    private var timer = Timer()
+
     override fun dispatch(action: Any) {
         when (action) {
-            is LoadTimerEvent    -> loadTimer(action.id)
-            is NameChangedEvent    -> silentUpdate(state.copy(name = action.name))
-            is HoursChangedEvent   -> silentUpdate(state.copy(hours = action.hours))
-            is MinutesChangedEvent -> silentUpdate(state.copy(minutes = action.minutes))
+            is LoadTimerAction      -> loadTimer(action.id)
+            is NameChangedAction    -> silentUpdate(state.copy(name = action.name))
+            is HoursChangedAction   -> silentUpdate(state.copy(hours = action.hours))
+            is MinutesChangedAction -> silentUpdate(state.copy(minutes = action.minutes))
+            is DeleteTimerAction    -> deleteTimer()
+            is StoreTimerAction     -> storeTimer()
         }
     }
 
     private fun loadTimer(id: Long) = jobs.launch(UI) {
-        timerRepository.get(id).await()?.apply { update(toUiData()) }
+        if (id == 0L) return@launch
+
+        timer = timerRepository.get(id).await()
+                ?: Timer()
+
+        update(timer.toUiData())
     }
 
     private fun Timer.toUiData() = TimerUiData(
@@ -30,4 +40,19 @@ class TimerViewModel(
             (duration / (1000 * 60 * 60)).toInt(),
             (duration / (1000 * 60) % 60).toInt()
     )
+
+    private fun storeTimer() = jobs.launch(UI) {
+        val updatedTimer = timer.copy(
+                name = state.name,
+                duration = state.duration
+        )
+
+        timerRepository.store(updatedTimer).await()
+        transient(state.copy(command = finishActivity()))
+    }
+
+    private fun deleteTimer() = jobs.launch(UI) {
+        timerRepository.delete(state.id).await()
+        transient(state.copy(command = finishActivity()))
+    }
 }

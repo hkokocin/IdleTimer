@@ -6,12 +6,11 @@ import android.os.Bundle
 import java.io.Serializable
 import kotlin.reflect.KClass
 
-fun <T : Activity> Activity.startForResult(
-        type: KClass<T>,
+inline fun <reified T : Activity> Activity.startForResult(
         requestCode: Int,
         init: Intent.() -> Unit = {}
 ) {
-    val intent = Intent(this, type.java)
+    val intent = Intent(this, T::class.java)
     intent.init()
     startActivityForResult(intent, requestCode)
 }
