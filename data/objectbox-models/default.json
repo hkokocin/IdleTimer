@@ -26,9 +26,29 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:5596090669996961619",
+      "lastPropertyId": "3:5780876535834645522",
+      "name": "NotificationJob",
+      "properties": [
+        {
+          "id": "1:6971981815592179931",
+          "name": "id"
+        },
+        {
+          "id": "2:639272836749604146",
+          "name": "timerId"
+        },
+        {
+          "id": "3:5780876535834645522",
+          "name": "jobId"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:7136223891926967808",
+  "lastEntityId": "2:5596090669996961619",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

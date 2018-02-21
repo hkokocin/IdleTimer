@@ -1,5 +1,6 @@
 package com.kokocinski.timerlist
 
+import com.evernote.android.job.JobManager
 import com.kokocinski.data.Timer
 import com.kokocinski.data.TimerRepository
 import com.kokocinski.data.jobs.JobDataRepository
@@ -14,7 +15,8 @@ class TimerListViewModel(
         private val timerRepository: TimerRepository,
         private val jobDataRepository: JobDataRepository,
         private val jobs: Jobs,
-        private val timeProvider: SystemTimerProvider
+        private val timeProvider: SystemTimerProvider,
+        private val jobManager: JobManager
 ) : BaseViewModel<TimerListState>(TimerListState()) {
 
     init {
@@ -27,6 +29,7 @@ class TimerListViewModel(
             is DeleteTimerAction  -> delete(action.id)
             is EditTimerAction    -> transient(state.copy(command = editTimer(action.id)))
             is StartTimerAction   -> onStartTimer(action.timer)
+            is RestartTimerAction -> restartTimer(action.timer)
             is UpdateTimersAction -> loadAll()
         }
     }
@@ -36,7 +39,7 @@ class TimerListViewModel(
         jobs.clear()
     }
 
-    private fun onStartTimer(timer: Timer) {
+    private fun onStartTimer(timer: Timer) = jobs.launch(UI) {
         val timers = state.timers
                 .map { if (it.id == timer.id) startTimer(it, timer) else it }
                 .sortedBy { it.timer.millisRemaining }
@@ -45,13 +48,18 @@ class TimerListViewModel(
         transient(state.copy(command = clearNotification(timer.name.hashCode())))
     }
 
-    private fun startTimer(
+    private fun restartTimer(timer: Timer) = jobs.launch(UI) {
+        jobDataRepository.cancelJob(timer.id)
+        onStartTimer(timer)
+    }
+
+    private suspend fun startTimer(
             widgetState: TimerWidgetState,
             expiredTimer: Timer
     ): TimerWidgetState {
         val timer = expiredTimer.copy(start = timeProvider.currentTimeMillis())
         timerRepository.store(timer)
-        jobDataRepository.start(timer)
+        jobDataRepository.start(timer).await()
         return widgetState.copy(timer = timer)
     }
 

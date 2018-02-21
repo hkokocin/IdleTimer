@@ -9,5 +9,11 @@ data class Timer(
         val name: String = "",
         val duration: Long = 0,
         val start: Long = 0
-//        val notificationTarget: String = ""
+)
+
+@Entity
+data class NotificationJob(
+        @Id var id: Long = 0,
+        val timerId: Long = 0,
+        val jobId: Int = 0
 )

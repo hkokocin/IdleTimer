@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
+import com.evernote.android.job.JobManager
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
@@ -25,14 +26,15 @@ fun timerListModule(activity: AppCompatActivity) = Kodein.Module {
     bind<TimerWidget>() with provider { TimerWidget(instance()) }
     bind<TimerListViewModel>() with provider {
         ViewModelProviders
-                .of(activity, ViewModelFactory(instance(), instance()))
+                .of(activity, ViewModelFactory(instance(), instance(), instance()))
                 .get(TimerListViewModel::class.java)
     }
 }
 
 class ViewModelFactory(
         private val timerRepository: TimerRepository,
-        private val jobDataRepository: JobDataRepository
+        private val jobDataRepository: JobDataRepository,
+        private val jobManager: JobManager
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = when (modelClass) {
@@ -40,5 +42,11 @@ class ViewModelFactory(
         else                           -> throw IllegalArgumentException("Unknown ViewModel of type ${modelClass.name}")
     } as T
 
-    private fun timerViewModel() = TimerListViewModel(timerRepository, jobDataRepository, Jobs(), SystemTimerProvider())
+    private fun timerViewModel() = TimerListViewModel(
+            timerRepository,
+            jobDataRepository,
+            Jobs(),
+            SystemTimerProvider(),
+            jobManager
+    )
 }
