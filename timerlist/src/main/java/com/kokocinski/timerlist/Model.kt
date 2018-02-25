@@ -22,4 +22,5 @@ data class LaunchAction(val packageName: String = "")
 data class EditTimerAction(val id: Long = 0)
 data class DeleteTimerAction(val id: Long = 0)
 data class StartTimerAction(val timer: Timer = Timer())
+data class RestartTimerAction(val timer: Timer = Timer())
 class UpdateTimersAction

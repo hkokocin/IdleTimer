@@ -70,7 +70,7 @@ class TimerWidget(
         when (itemId) {
             R.id.menu_item_edit    -> dispatch(EditTimerAction(timer.id))
             R.id.menu_item_delete  -> dispatch(DeleteTimerAction(timer.id))
-            R.id.menu_item_restart -> dispatch(StartTimerAction(timer))
+            R.id.menu_item_restart -> dispatch(RestartTimerAction(timer))
         }
 
         return true
