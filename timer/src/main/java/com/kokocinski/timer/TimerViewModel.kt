@@ -21,15 +21,13 @@ class TimerViewModel(
             is HoursChangedAction   -> silentUpdate(state.copy(hours = action.hours))
             is MinutesChangedAction -> silentUpdate(state.copy(minutes = action.minutes))
             is DeleteTimerAction    -> deleteTimer()
-            is StoreTimerAction     -> storeTimer()
+            is StoreTimerAction     -> onStore()
         }
     }
 
     private fun loadTimer(id: Long) = jobs.launch(UI) {
-        if (id == 0L) return@launch
-
-        timer = timerRepository.get(id).await()
-                ?: Timer()
+        if (id != 0L)
+            timer = timerRepository.get(id).await() ?: Timer()
 
         update(timer.toUiData())
     }
@@ -41,18 +39,30 @@ class TimerViewModel(
             (duration / (1000 * 60) % 60).toInt()
     )
 
-    private fun storeTimer() = jobs.launch(UI) {
+    private fun onStore() = jobs.launch(UI) {
+        storeTimer()
+        finish()
+    }
+
+    private suspend fun storeTimer() {
+
+        if (state.name.isBlank() || state.duration == 0L) return
+
         val updatedTimer = timer.copy(
                 name = state.name,
                 duration = state.duration
         )
 
         timerRepository.store(updatedTimer).await()
-        transient(state.copy(command = finishActivity()))
     }
 
     private fun deleteTimer() = jobs.launch(UI) {
-        timerRepository.delete(state.id).await()
-        transient(state.copy(command = finishActivity()))
+        if (state.id != 0L)
+            timerRepository.delete(state.id).await()
+
+        finish()
     }
+
+    private fun finish() = transient(state.copy(command = finishActivity()))
+
 }

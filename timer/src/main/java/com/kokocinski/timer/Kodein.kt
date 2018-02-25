@@ -16,7 +16,6 @@ import com.kokocinski.toolkit.coroutines.Jobs
 fun timerScope(activity: AppCompatActivity) = Kodein { import(timerModule(activity), true) }
 
 fun timerModule(activity: AppCompatActivity) = Kodein.Module {
-    // Introduce some change
     import(activityModule(activity), true)
     import(dataModule(), true)
 

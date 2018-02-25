@@ -34,7 +34,7 @@ class TimerJob : Job() {
 
     private fun createResultIntent(): PendingIntent? {
         val resultIntent = Intent(context, TimerListActivity::class.java)
-        resultIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        resultIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
 
         val stackBuilder = TaskStackBuilder.create(context)
         stackBuilder.addParentStack(TimerListActivity::class.java)

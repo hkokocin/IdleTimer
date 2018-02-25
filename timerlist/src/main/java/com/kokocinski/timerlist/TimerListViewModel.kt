@@ -75,6 +75,8 @@ class TimerListViewModel(
                 .map { it.toWidgetState(::dispatch) }
                 .sortedBy { it.timer.millisRemaining }
 
+        println("DEBUG: TimerListViewModel.loadAll")
+
         update(state.copy(timers = timers))
     }
 }
