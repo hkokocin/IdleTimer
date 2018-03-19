@@ -27,7 +27,6 @@ class IdleTimerApp : Application() {
 
         initDataModule(this)
 
-        timerRepository.initializeDefaultTimers()
         jobManager.addJobCreator(timerJobCreator)
 
         if (!LeakCanary.isInAnalyzerProcess(this)) LeakCanary.install(this)
@@ -47,9 +46,9 @@ class IdleTimerApp : Application() {
 
         channel.description = getString(R.string.timer_channel_description)
         channel.enableLights(true)
-        channel.lightColor = Color.RED
+        channel.lightColor = Color.CYAN
         channel.enableVibration(true)
-        channel.vibrationPattern = longArrayOf(300, 50, 50, 50)
+        channel.vibrationPattern = longArrayOf(300, 50, 100, 50, 100)
 
         notificationManager.createNotificationChannel(channel)
     }

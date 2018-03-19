@@ -1,6 +1,5 @@
 package com.kokocinski.data
 
-import com.kokocinski.toolkit.SystemTimerProvider
 import io.objectbox.Box
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.async
@@ -16,9 +15,10 @@ class TimerRepository(
     fun delete(id: Long): Deferred<Unit> = async { timerBox.remove(id) }
 
     fun initializeDefaultTimers() = async {
-        if (!preferences.isDefaultTimersInitialized()) {
-            timerBox.put(defaultTimers)
-            preferences.setDefaultTimersInitialized()
-        }
+        if (preferences.isDefaultTimersInitialized()) return@async all.await()
+
+        timerBox.put(defaultTimers)
+        preferences.setDefaultTimersInitialized()
+        all.await()
     }
 }

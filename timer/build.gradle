@@ -39,6 +39,9 @@ dependencies{
     implementation dependencies.appCompat
     implementation dependencies.supportDesign
     implementation dependencies.constraintLayout
+    implementation (dependencies.numberPicker){
+        exclude group: 'com.android.support'
+    }
 
     implementation dependencies.coroutines
     implementation dependencies.coroutinesAndroid
