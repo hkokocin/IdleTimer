@@ -1,6 +1,6 @@
 package com.kokocinski.timerlist
 
-import com.evernote.android.job.JobManager
+import com.kokocinski.data.ApplicationPreferences
 import com.kokocinski.data.Timer
 import com.kokocinski.data.TimerRepository
 import com.kokocinski.data.jobs.JobDataRepository
@@ -16,7 +16,7 @@ class TimerListViewModel(
         private val jobDataRepository: JobDataRepository,
         private val jobs: Jobs,
         private val timeProvider: SystemTimerProvider,
-        private val jobManager: JobManager
+        private val preferences: ApplicationPreferences
 ) : BaseViewModel<TimerListState>(TimerListState()) {
 
     init {
@@ -25,12 +25,14 @@ class TimerListViewModel(
 
     override fun dispatch(action: Any) {
         when (action) {
-            is LaunchAction       -> transient(state.copy(command = launchAppByPackage(action.packageName)))
-            is DeleteTimerAction  -> delete(action.id)
-            is EditTimerAction    -> transient(state.copy(command = editTimer(action.id)))
-            is StartTimerAction   -> onStartTimer(action.timer)
-            is RestartTimerAction -> restartTimer(action.timer)
-            is UpdateTimersAction -> loadAll()
+            is LaunchAction            -> transient(state.copy(command = launchAppByPackage(action.packageName)))
+            is DeleteTimerAction       -> delete(action.id)
+            is EditTimerAction         -> transient(state.copy(command = editTimer(action.id)))
+            is StartTimerAction        -> onStartTimer(action.timer)
+            is RestartTimerAction      -> restartTimer(action.timer)
+            is UpdateTimersAction      -> loadAll()
+            is LoadDefaultTimersAction -> loadDefaultTimers()
+            is RejectDefaultTimersAction -> preferences.isDefaultTimersInitialized()
         }
     }
 
@@ -72,11 +74,22 @@ class TimerListViewModel(
     private fun loadAll() = jobs.launch(UI) {
         val timers = timerRepository.all
                 .await()
-                .map { it.toWidgetState(::dispatch) }
-                .sortedBy { it.timer.millisRemaining }
+                .toWidgetStates()
 
-        println("DEBUG: TimerListViewModel.loadAll")
+        if (timers.isEmpty() && !preferences.isDefaultTimersInitialized())
+            transient(state.copy(command = askToInitializeDefaultTimers(::dispatch)))
+        else
+            update(state.copy(timers = timers))
+    }
+
+    private fun loadDefaultTimers() = jobs.launch(UI) {
+        val timers = timerRepository.initializeDefaultTimers()
+                .await()
+                .toWidgetStates()
 
         update(state.copy(timers = timers))
     }
+
+    private fun List<Timer>.toWidgetStates() = map { it.toWidgetState(::dispatch) }
+            .sortedBy { it.timer.millisRemaining }
 }

@@ -4,4 +4,8 @@
     <string name="delete">Delete</string>
     <string name="restart">Restart</string>
     <string name="new_timer">New Timer</string>
+    <string name="templates_dialog_title">Prepared Timers</string>
+    <string name="templates_dialog_message">Do you want to load a predefined set of timers for IdleHeroes?</string>
+    <string name="apply_template">Apply Template</string>
+    <string name="no">No</string>
 </resources>

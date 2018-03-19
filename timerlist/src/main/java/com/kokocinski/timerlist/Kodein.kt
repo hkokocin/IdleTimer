@@ -10,6 +10,7 @@ import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.provider
 import com.kokocinski.commonui.thirdPartyUiModule
+import com.kokocinski.data.ApplicationPreferences
 import com.kokocinski.data.TimerRepository
 import com.kokocinski.data.dataModule
 import com.kokocinski.data.jobs.JobDataRepository
@@ -34,7 +35,7 @@ fun timerListModule(activity: AppCompatActivity) = Kodein.Module {
 class ViewModelFactory(
         private val timerRepository: TimerRepository,
         private val jobDataRepository: JobDataRepository,
-        private val jobManager: JobManager
+        private val preferences: ApplicationPreferences
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = when (modelClass) {
@@ -47,6 +48,7 @@ class ViewModelFactory(
             jobDataRepository,
             Jobs(),
             SystemTimerProvider(),
-            jobManager
+            preferences
+
     )
 }

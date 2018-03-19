@@ -6,9 +6,9 @@ import android.arch.lifecycle.OnLifecycleEvent
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.widget.EditText
-import android.widget.NumberPicker
 import com.kokocinski.toolkit.androidExtensions.afterTextChanged
 import com.kokocinski.toolkit.redukt.BaseView
+import com.shawnlin.numberpicker.NumberPicker
 
 class TimerView(
         private val viewModel: TimerViewModel,

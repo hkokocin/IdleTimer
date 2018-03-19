@@ -24,3 +24,5 @@ data class DeleteTimerAction(val id: Long = 0)
 data class StartTimerAction(val timer: Timer = Timer())
 data class RestartTimerAction(val timer: Timer = Timer())
 class UpdateTimersAction
+class LoadDefaultTimersAction
+class RejectDefaultTimersAction
